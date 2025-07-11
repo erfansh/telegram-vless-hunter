@@ -1,128 +1,82 @@
 <!DOCTYPE html>
 <html lang="fa">
 <head>
-  <meta charset="UTF-8" />
-  <title>VLESS Hunter Viewer</title>
+  <meta charset="UTF-8">
+  <title>لینک اشتراک V2Ray</title>
   <style>
     body {
       background-color: #121212;
       color: #eee;
       font-family: Tahoma, sans-serif;
       direction: rtl;
-      padding: 30px;
+      padding: 40px;
     }
+
     h1 {
       color: #0f9d58;
+      margin-bottom: 20px;
     }
-    .file-block {
-      margin-bottom: 40px;
+
+    .container {
+      background-color: #1e1e1e;
+      border: 1px solid #333;
+      border-radius: 10px;
+      padding: 20px;
+      max-width: 600px;
     }
-    h2 {
-      margin-bottom: 5px;
-      color: #ffca28;
+
+    input {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: none;
+      font-size: 14px;
+      margin-bottom: 10px;
+      background-color: #2a2a2a;
+      color: #fff;
     }
-    pre {
-      background-color: #222;
-      padding: 15px;
-      border-radius: 8px;
-      overflow-x: auto;
-      white-space: pre-wrap;
-      word-break: break-word;
-      position: relative;
-    }
+
     button {
-      position: absolute;
-      left: 10px;
-      top: 10px;
       background-color: #0f9d58;
       color: white;
       border: none;
-      padding: 5px 10px;
-      font-size: 12px;
+      padding: 10px 20px;
       border-radius: 5px;
+      font-size: 14px;
       cursor: pointer;
     }
-    nav {
-      margin-bottom: 20px;
+
+    button:hover {
+      background-color: #0c7c44;
     }
-    nav a {
-      color: #1e88e5;
-      margin-left: 15px;
-      text-decoration: none;
-      font-weight: bold;
+
+    .desc {
+      margin-top: 20px;
+      font-size: 13px;
+      color: #bbb;
     }
   </style>
 </head>
 <body>
 
-<h1>📁 پروژه VLESS Hunter</h1>
+  <h1>🔗 لینک اشتراک V2Ray</h1>
 
-<nav>
-  <a href="#main">main.py</a>
-  <a href="#config">config.py</a>
-  <a href="#reqs">requirements.txt</a>
-  <a href="#readme">README.md</a>
-</nav>
+  <div class="container">
+    <label for="subLink">برای استفاده در V2RayNG، لینک زیر را کپی و اضافه کنید:</label>
+    <input type="text" id="subLink" value="https://erfansh.github.io/telegram-vless-hunter/sub.txt" readonly>
+    <button onclick="copyLink()">📋 کپی لینک</button>
+    <div class="desc">در برنامه V2RayNG قسمت <b>Subscription</b> این لینک رو اضافه کن.</div>
+  </div>
 
-<div class="file-block" id="main">
-  <h2>main.py</h2>
-  <pre id="main-content"><button onclick="copyText('main-content')">کپی</button>در حال بارگذاری...</pre>
-</div>
-
-<div class="file-block" id="config">
-  <h2>config.py</h2>
-  <pre id="config-content"><button onclick="copyText('config-content')">کپی</button>در حال بارگذاری...</pre>
-</div>
-
-<div class="file-block" id="reqs">
-  <h2>requirements.txt</h2>
-  <pre id="reqs-content"><button onclick="copyText('reqs-content')">کپی</button>در حال بارگذاری...</pre>
-</div>
-
-<div class="file-block" id="readme">
-  <h2>README.md</h2>
-  <pre id="readme-content"><button onclick="copyText('readme-content')">کپی</button>در حال بارگذاری...</pre>
-</div>
-
-<script>
-  const files = {
-    'main-content': 'main.py',
-    'config-content': 'config.py',
-    'reqs-content': 'requirements.txt',
-    'readme-content': 'README.md'
-  };
-
-  const username = 'erfansh';
-  const repo = 'telegram-vless-hunter';
-  const branch = 'main';
-
-  for (const [elementId, filename] of Object.entries(files)) {
-    fetch(`https://raw.githubusercontent.com/${username}/${repo}/${branch}/${filename}`)
-      .then(response => response.text())
-      .then(data => {
-        document.getElementById(elementId).innerText = data;
-      })
-      .catch(err => {
-        document.getElementById(elementId).innerText = '⛔ خطا در بارگذاری فایل';
-      });
-  }
-
-  function copyText(id) {
-    const el = document.getElementById(id);
-    const range = document.createRange();
-    range.selectNodeContents(el);
-    const sel = window.getSelection();
-    sel.removeAllRanges();
-    sel.addRange(range);
-    try {
-      document.execCommand('copy');
-      alert('کد کپی شد!');
-    } catch (err) {
-      alert('کپی نشد.');
+  <script>
+    function copyLink() {
+      const input = document.getElementById("subLink");
+      input.select();
+      input.setSelectionRange(0, 99999); // برای موبایل
+      document.execCommand("copy");
+      alert("لینک کپی شد!");
     }
-    sel.removeAllRanges();
-  }
-</script>
+  </script>
 
 </body>
 </html>
