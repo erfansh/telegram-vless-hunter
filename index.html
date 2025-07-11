@@ -1,38 +1,77 @@
 <!DOCTYPE html>
 <html lang="fa">
 <head>
-    <meta charset="UTF-8" />
-    <title>Telegram VLESS Hunter</title>
-    <style>
-        body { font-family: Tahoma, sans-serif; direction: rtl; padding: 20px; background: #121212; color: #eee; }
-        h1 { color: #0f9d58; }
-        pre {
-            background: #222;
-            padding: 15px;
-            border-radius: 8px;
-            overflow-x: auto;
-            white-space: pre-wrap;
-            word-break: break-word;
-            user-select: text; /* قابل انتخاب و کپی */
-            max-height: 400px;
-            margin-bottom: 20px;
-        }
-        a { color: #1e88e5; text-decoration: none; }
-        .filename {
-            font-weight: bold;
-            margin-top: 30px;
-            margin-bottom: 5px;
-            font-size: 1.1em;
-            color: #ffca28;
-        }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Telegram VLESS Hunter - Documentation</title>
+<style>
+  body {
+    font-family: 'Tahoma', sans-serif;
+    direction: rtl;
+    background-color: #121212;
+    color: #eee;
+    margin: 0;
+    padding: 20px;
+  }
+  h1 {
+    color: #0f9d58;
+    margin-bottom: 20px;
+  }
+  nav {
+    margin-bottom: 20px;
+  }
+  nav a {
+    color: #1e88e5;
+    margin-left: 15px;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  nav a:hover {
+    text-decoration: underline;
+  }
+  section {
+    margin-bottom: 30px;
+  }
+  pre {
+    background: #222;
+    padding: 15px;
+    border-radius: 8px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+    position: relative;
+  }
+  button.copy-btn {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #0f9d58;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+  }
+  button.copy-btn:hover {
+    background: #0b7a3e;
+  }
+</style>
 </head>
 <body>
-    <h1>Telegram VLESS Hunter - کدهای پروژه</h1>
 
-    <div>
-        <div class="filename">main.py</div>
-        <pre>
+<h1>Telegram VLESS Hunter - مستندات</h1>
+
+<nav>
+  <a href="#mainpy">main.py</a>
+  <a href="#configpy">config.py</a>
+  <a href="#requirementstxt">requirements.txt</a>
+  <a href="#readmemd">README.md</a>
+</nav>
+
+<section id="mainpy">
+  <h2>main.py <button class="copy-btn" onclick="copyCode('code-main')">کپی</button></h2>
+  <pre id="code-main">
 from telethon import TelegramClient
 import re
 from config import api_id, api_hash, channels
@@ -61,12 +100,12 @@ async def main():
 
 if __name__ == '__main__':
     asyncio.run(main())
-        </pre>
-    </div>
+  </pre>
+</section>
 
-    <div>
-        <div class="filename">config.py</div>
-        <pre>
+<section id="configpy">
+  <h2>config.py <button class="copy-btn" onclick="copyCode('code-config')">کپی</button></h2>
+  <pre id="code-config">
 api_id = 24251
 api_hash = '87489fc95cbd9c9881e7b164271daad0'
 
@@ -75,23 +114,43 @@ channels = [
     'v2rayconfigdaily',
     'freev2ray',
 ]
-        </pre>
-    </div>
+  </pre>
+</section>
 
-    <div>
-        <div class="filename">requirements.txt</div>
-        <pre>
+<section id="requirementstxt">
+  <h2>requirements.txt <button class="copy-btn" onclick="copyCode('code-req')">کپی</button></h2>
+  <pre id="code-req">
 telethon
-        </pre>
-    </div>
+  </pre>
+</section>
 
-    <div>
-        <div class="filename">README.md</div>
-        <pre>
+<section id="readmemd">
+  <h2>README.md <button class="copy-btn" onclick="copyCode('code-readme')">کپی</button></h2>
+  <pre id="code-readme">
 # Telegram VLESS Hunter
 
 این پروژه برای استخراج کانفیگ‌های VLESS از کانال‌های تلگرام نوشته شده است.
-        </pre>
-    </div>
+  </pre>
+</section>
+
+<script>
+  function copyCode(id) {
+    const code = document.getElementById(id);
+    if (!code) return;
+    const range = document.createRange();
+    range.selectNodeContents(code);
+    const selection = window.getSelection();
+    selection.removeAllRanges();
+    selection.addRange(range);
+    try {
+      document.execCommand('copy');
+      alert('کد کپی شد!');
+      selection.removeAllRanges();
+    } catch (err) {
+      alert('کپی انجام نشد، لطفا دستی کپی کنید.');
+    }
+  }
+</script>
+
 </body>
 </html>
