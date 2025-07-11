@@ -1,154 +1,126 @@
 <!DOCTYPE html>
 <html lang="fa">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Telegram VLESS Hunter - Documentation</title>
-<style>
-  body {
-    font-family: 'Tahoma', sans-serif;
-    direction: rtl;
-    background-color: #121212;
-    color: #eee;
-    margin: 0;
-    padding: 20px;
-  }
-  h1 {
-    color: #0f9d58;
-    margin-bottom: 20px;
-  }
-  nav {
-    margin-bottom: 20px;
-  }
-  nav a {
-    color: #1e88e5;
-    margin-left: 15px;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  nav a:hover {
-    text-decoration: underline;
-  }
-  section {
-    margin-bottom: 30px;
-  }
-  pre {
-    background: #222;
-    padding: 15px;
-    border-radius: 8px;
-    overflow-x: auto;
-    white-space: pre-wrap;
-    word-break: break-word;
-    position: relative;
-  }
-  button.copy-btn {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background: #0f9d58;
-    border: none;
-    color: white;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 12px;
-  }
-  button.copy-btn:hover {
-    background: #0b7a3e;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <title>VLESS Hunter Viewer</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #eee;
+      font-family: Tahoma, sans-serif;
+      direction: rtl;
+      padding: 30px;
+    }
+    h1 {
+      color: #0f9d58;
+    }
+    .file-block {
+      margin-bottom: 40px;
+    }
+    h2 {
+      margin-bottom: 5px;
+      color: #ffca28;
+    }
+    pre {
+      background-color: #222;
+      padding: 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+      position: relative;
+    }
+    button {
+      position: absolute;
+      left: 10px;
+      top: 10px;
+      background-color: #0f9d58;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      font-size: 12px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    nav {
+      margin-bottom: 20px;
+    }
+    nav a {
+      color: #1e88e5;
+      margin-left: 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
 
-<h1>Telegram VLESS Hunter - مستندات</h1>
+<h1>📁 پروژه VLESS Hunter</h1>
 
 <nav>
-  <a href="#mainpy">main.py</a>
-  <a href="#configpy">config.py</a>
-  <a href="#requirementstxt">requirements.txt</a>
-  <a href="#readmemd">README.md</a>
+  <a href="#main">main.py</a>
+  <a href="#config">config.py</a>
+  <a href="#reqs">requirements.txt</a>
+  <a href="#readme">README.md</a>
 </nav>
 
-<section id="mainpy">
-  <h2>main.py <button class="copy-btn" onclick="copyCode('code-main')">کپی</button></h2>
-  <pre id="code-main">
-from telethon import TelegramClient
-import re
-from config import api_id, api_hash, channels
-import asyncio
+<div class="file-block" id="main">
+  <h2>main.py</h2>
+  <pre id="main-content"><button onclick="copyText('main-content')">کپی</button>در حال بارگذاری...</pre>
+</div>
 
-vless_pattern = re.compile(r'vless://[^\s]+')
+<div class="file-block" id="config">
+  <h2>config.py</h2>
+  <pre id="config-content"><button onclick="copyText('config-content')">کپی</button>در حال بارگذاری...</pre>
+</div>
 
-async def main():
-    client = TelegramClient('session_session', api_id, api_hash)
-    await client.start()
-    print("🚀 Connected to Telegram!")
+<div class="file-block" id="reqs">
+  <h2>requirements.txt</h2>
+  <pre id="reqs-content"><button onclick="copyText('reqs-content')">کپی</button>در حال بارگذاری...</pre>
+</div>
 
-    for channel in channels:
-        print(f"📡 Reading channel: {channel}")
-        try:
-            async for message in client.iter_messages(channel, limit=100):
-                if message.message:
-                    matches = vless_pattern.findall(message.message)
-                    for match in matches:
-                        print(f"🔹 Found vless config: {match}")
-        except Exception as e:
-            print(f"⚠️ Error reading channel {channel}: {e}")
-
-    print("🏁 Task completed.")
-    await client.disconnect()
-
-if __name__ == '__main__':
-    asyncio.run(main())
-  </pre>
-</section>
-
-<section id="configpy">
-  <h2>config.py <button class="copy-btn" onclick="copyCode('code-config')">کپی</button></h2>
-  <pre id="code-config">
-api_id = 24251
-api_hash = '87489fc95cbd9c9881e7b164271daad0'
-
-channels = [
-    'v2raychannel',
-    'v2rayconfigdaily',
-    'freev2ray',
-]
-  </pre>
-</section>
-
-<section id="requirementstxt">
-  <h2>requirements.txt <button class="copy-btn" onclick="copyCode('code-req')">کپی</button></h2>
-  <pre id="code-req">
-telethon
-  </pre>
-</section>
-
-<section id="readmemd">
-  <h2>README.md <button class="copy-btn" onclick="copyCode('code-readme')">کپی</button></h2>
-  <pre id="code-readme">
-# Telegram VLESS Hunter
-
-این پروژه برای استخراج کانفیگ‌های VLESS از کانال‌های تلگرام نوشته شده است.
-  </pre>
-</section>
+<div class="file-block" id="readme">
+  <h2>README.md</h2>
+  <pre id="readme-content"><button onclick="copyText('readme-content')">کپی</button>در حال بارگذاری...</pre>
+</div>
 
 <script>
-  function copyCode(id) {
-    const code = document.getElementById(id);
-    if (!code) return;
+  const files = {
+    'main-content': 'main.py',
+    'config-content': 'config.py',
+    'reqs-content': 'requirements.txt',
+    'readme-content': 'README.md'
+  };
+
+  const username = 'erfansh';
+  const repo = 'telegram-vless-hunter';
+  const branch = 'main';
+
+  for (const [elementId, filename] of Object.entries(files)) {
+    fetch(`https://raw.githubusercontent.com/${username}/${repo}/${branch}/${filename}`)
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById(elementId).innerText = data;
+      })
+      .catch(err => {
+        document.getElementById(elementId).innerText = '⛔ خطا در بارگذاری فایل';
+      });
+  }
+
+  function copyText(id) {
+    const el = document.getElementById(id);
     const range = document.createRange();
-    range.selectNodeContents(code);
-    const selection = window.getSelection();
-    selection.removeAllRanges();
-    selection.addRange(range);
+    range.selectNodeContents(el);
+    const sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
     try {
       document.execCommand('copy');
       alert('کد کپی شد!');
-      selection.removeAllRanges();
     } catch (err) {
-      alert('کپی انجام نشد، لطفا دستی کپی کنید.');
+      alert('کپی نشد.');
     }
+    sel.removeAllRanges();
   }
 </script>
 
