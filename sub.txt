@@ -1,1 +1,2 @@
-
+vless://abcd1234-abcd-abcd-abcd-abcd12345678@1.2.3.4:443?encryption=none&security=tls&type=ws&host=example.com&path=%2F#Test1
+vless://efgh5678-efgh-efgh-efgh-efgh87654321@5.6.7.8:443?encryption=none&security=tls&type=ws&host=another.com&path=%2F#Test2
