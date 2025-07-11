@@ -6,14 +6,92 @@
     <style>
         body { font-family: Tahoma, sans-serif; direction: rtl; padding: 20px; background: #121212; color: #eee; }
         h1 { color: #0f9d58; }
-        pre { background: #222; padding: 10px; border-radius: 5px; overflow-x: auto; }
+        pre {
+            background: #222;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            word-break: break-word;
+            user-select: text; /* قابل انتخاب و کپی */
+            max-height: 400px;
+            margin-bottom: 20px;
+        }
         a { color: #1e88e5; text-decoration: none; }
+        .filename {
+            font-weight: bold;
+            margin-top: 30px;
+            margin-bottom: 5px;
+            font-size: 1.1em;
+            color: #ffca28;
+        }
     </style>
 </head>
 <body>
-    <h1>Telegram VLESS Hunter</h1>
-    <p>فایل‌ها و کدهای پروژه:</p>
-    <ul>
-        <li><a href="main.py" target="_blank">main.py</a></li>
-        <li><a href="config.py" target="_blank">config.py</a></li>
-        <li><
+    <h1>Telegram VLESS Hunter - کدهای پروژه</h1>
+
+    <div>
+        <div class="filename">main.py</div>
+        <pre>
+from telethon import TelegramClient
+import re
+from config import api_id, api_hash, channels
+import asyncio
+
+vless_pattern = re.compile(r'vless://[^\s]+')
+
+async def main():
+    client = TelegramClient('session_session', api_id, api_hash)
+    await client.start()
+    print("🚀 Connected to Telegram!")
+
+    for channel in channels:
+        print(f"📡 Reading channel: {channel}")
+        try:
+            async for message in client.iter_messages(channel, limit=100):
+                if message.message:
+                    matches = vless_pattern.findall(message.message)
+                    for match in matches:
+                        print(f"🔹 Found vless config: {match}")
+        except Exception as e:
+            print(f"⚠️ Error reading channel {channel}: {e}")
+
+    print("🏁 Task completed.")
+    await client.disconnect()
+
+if __name__ == '__main__':
+    asyncio.run(main())
+        </pre>
+    </div>
+
+    <div>
+        <div class="filename">config.py</div>
+        <pre>
+api_id = 24251
+api_hash = '87489fc95cbd9c9881e7b164271daad0'
+
+channels = [
+    'v2raychannel',
+    'v2rayconfigdaily',
+    'freev2ray',
+]
+        </pre>
+    </div>
+
+    <div>
+        <div class="filename">requirements.txt</div>
+        <pre>
+telethon
+        </pre>
+    </div>
+
+    <div>
+        <div class="filename">README.md</div>
+        <pre>
+# Telegram VLESS Hunter
+
+این پروژه برای استخراج کانفیگ‌های VLESS از کانال‌های تلگرام نوشته شده است.
+        </pre>
+    </div>
+</body>
+</html>
