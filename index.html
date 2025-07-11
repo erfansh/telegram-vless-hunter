@@ -51,9 +51,17 @@
     }
 
     .desc {
-      margin-top: 20px;
+      margin-top: 15px;
       font-size: 13px;
       color: #bbb;
+    }
+
+    #qr {
+      margin-top: 25px;
+      background: white;
+      padding: 10px;
+      display: inline-block;
+      border-radius: 8px;
     }
   </style>
 </head>
@@ -65,10 +73,16 @@
     <label for="subLink">برای استفاده در V2RayNG، لینک زیر را کپی و اضافه کنید:</label>
     <input type="text" id="subLink" value="https://erfansh.github.io/telegram-vless-hunter/sub.txt" readonly>
     <button onclick="copyLink()">📋 کپی لینک</button>
-    <div class="desc">در برنامه V2RayNG قسمت <b>Subscription</b> این لینک رو اضافه کن.</div>
+    <div class="desc">در برنامه V2RayNG قسمت <b>Subscription</b> این لینک رو وارد یا اسکن کن.</div>
+
+    <div class="desc">📷 یا کد زیر را اسکن کن:</div>
+    <div id="qr"></div>
   </div>
 
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
   <script>
+    const link = document.getElementById("subLink").value;
+
     function copyLink() {
       const input = document.getElementById("subLink");
       input.select();
@@ -76,6 +90,12 @@
       document.execCommand("copy");
       alert("لینک کپی شد!");
     }
+
+    QRCode.toCanvas(document.createElement("canvas"), link, { width: 200 }, function (err, canvas) {
+      if (!err) {
+        document.getElementById("qr").appendChild(canvas);
+      }
+    });
   </script>
 
 </body>
